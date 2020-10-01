@@ -1,13 +1,13 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Tests\Unit\Managers;
+namespace Owowagency\LaravelMedia\Tests\Unit\Managers;
 
 use Mockery;
-use Owowagency\LaravelBasicMedia\Tests\TestCase;
+use Owowagency\LaravelMedia\Tests\TestCase;
+use Owowagency\LaravelMedia\Managers\MediaManager;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Owowagency\LaravelBasicMedia\Managers\MediaManager;
 use Spatie\MediaLibrary\MediaCollections\FileAdderFactory;
-use Owowagency\LaravelBasicMedia\Tests\Support\App\Models\TestModel;
+use Owowagency\LaravelMedia\Tests\Support\App\Models\TestModel;
 
 class MediaManagerTest extends TestCase
 {

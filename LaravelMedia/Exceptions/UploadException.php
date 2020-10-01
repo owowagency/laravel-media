@@ -1,12 +1,17 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Exceptions;
+namespace Owowagency\LaravelMedia\Exceptions;
 
 use Exception;
 
 class UploadException extends Exception
 {
-    public function __construct($type = 'string')
+    /**
+     * UploadException constructor.
+     *
+     * @param  string  $type
+     */
+    public function __construct(string $type = 'string')
     {
         $message = trans('laravel-basic-media::general.exception', [
             'type' => $type,

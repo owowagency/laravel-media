@@ -26,6 +26,7 @@
         "php": "^7.3",
         "illuminate/support": "^8.0",
         "owowagency/laravel-resources": "^3.0",
+        "ralouphie/mimey": "^2.1",
         "spatie/laravel-medialibrary": "^8.0.0"
     },
     "require-dev": {
@@ -35,12 +36,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Owowagency\\LaravelBasicMedia\\": "src"
+            "Owowagency\\LaravelMedia\\": "LaravelMedia"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Owowagency\\LaravelBasicMedia\\Tests\\": "tests"
+            "Owowagency\\LaravelMedia\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -54,10 +55,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Owowagency\\LaravelBasicMedia\\LaravelBasicMediaServiceProvider"
+                "Owowagency\\LaravelMedia\\LaravelMediaServiceProvider"
             ],
             "aliases": {
-                "MediaManager": "Owowagency\\LaravelBasicMedia\\Facades\\MediaManager"
+                "MediaManager": "Owowagency\\LaravelMedia\\Facades\\MediaManager"
             }
         }
     }

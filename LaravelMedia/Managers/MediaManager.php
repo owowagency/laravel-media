@@ -1,15 +1,19 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Managers;
+namespace Owowagency\LaravelMedia\Managers;
 
 use Illuminate\Support\Arr;
+use Mimey\MimeTypes;
+use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
 use Spatie\MediaLibrary\HasMedia;
-use Owowagency\LaravelBasicMedia\Rules\IsBase64;
+use Owowagency\LaravelMedia\Rules\IsBase64;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Owowagency\LaravelBasicMedia\Exceptions\UploadException;
+use Owowagency\LaravelMedia\Exceptions\UploadException;
 
 class MediaManager
 {
+    use GetsMimeTypeFromBase64;
+
     /**
      * Determine how to upload media.
      *
@@ -19,7 +23,7 @@ class MediaManager
      * @param  string  $collection
      * @return mixed
      *
-     * @throws \Owowagency\LaravelBasicMedia\Exceptions\UploadException
+     * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
      */
     public static function upload(
         HasMedia $model,
@@ -61,7 +65,7 @@ class MediaManager
      * @param  string  $collection
      * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
      *
-     * @throws \Owowagency\LaravelBasicMedia\Exceptions\UploadException
+     * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
      */
     public static function uploadFromString(
         HasMedia $model,
@@ -101,9 +105,11 @@ class MediaManager
 
         if (! is_null($name)) {
             if (empty($extension)) {
-                $format = '%s%s';
+                $format = '%s.%s';
 
-                $extension[1] = '';
+                $mimes = new MimeTypes();
+
+                $extension[1] = $mimes->getExtension(static::getMimeType($string));
             } else {
                 $format = '%s.%s';
             }

@@ -1,11 +1,14 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Rules;
+namespace Owowagency\LaravelMedia\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
 
 class IsBase64 implements Rule
 {
+    use GetsMimeTypeFromBase64;
+
     /**
      * Determine if the validation rule passes.
      *
@@ -41,23 +44,6 @@ class IsBase64 implements Rule
         }
 
         return true;
-    }
-
-    /**
-     * Removes data scheme from base64.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    protected function removeScheme(string $value): string
-    {
-        if (strpos($value, ';base64') !== false) {
-            list(, $value) = explode(';', $value);
-
-            list(, $value) = explode(',', $value);
-        }
-
-        return $value;
     }
 
     /**

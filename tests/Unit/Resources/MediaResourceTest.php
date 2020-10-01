@@ -1,12 +1,12 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Tests\Unit\Resources;
+namespace Owowagency\LaravelMedia\Tests\Unit\Resources;
 
 use Mockery;
-use Owowagency\LaravelBasicMedia\Tests\TestCase;
+use Owowagency\LaravelMedia\Tests\TestCase;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Owowagency\LaravelBasicMedia\Resources\MediaResource;
-use Owowagency\LaravelBasicMedia\Tests\Support\App\Models\TestModel;
+use Owowagency\LaravelMedia\Resources\MediaResource;
+use Owowagency\LaravelMedia\Tests\Support\App\Models\TestModel;
 
 class MediaResourceTest extends TestCase
 {
@@ -85,10 +85,11 @@ class MediaResourceTest extends TestCase
     }
 
     /** @test */
-    public function get_url_s3()
+    public function get_temp_url()
     {
-        // Make sure disk is set to s3
-        [$media] = $this->prepare('file', 's3');
+        config(['laravel-media.temporary_urls' => true]);
+
+        [$media] = $this->prepare('file');
 
         // Create mock ...
         $mock = Mockery::mock($media);
@@ -108,10 +109,9 @@ class MediaResourceTest extends TestCase
      * Prepares for tests.
      *
      * @param  string  $mime
-     * @param  string  $disk
      * @return array
      */
-    private function prepare(string $mime = 'file', string $disk = 'public'): array
+    private function prepare(string $mime = 'file'): array
     {
         $model = TestModel::create([
             'value' => 'value',
@@ -125,8 +125,8 @@ class MediaResourceTest extends TestCase
             'name' => 'some_name',
             'file_name' => 'some_file_name',
             'mime_type' => $mime,
-            'disk' => $disk,
-            'conversions_disk' => $disk,
+            'disk' => 'public',
+            'conversions_disk' => 'public',
             'size' => 9999,
             'manipulations' => [],
             'custom_properties' => [],

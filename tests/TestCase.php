@@ -1,10 +1,11 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Tests;
+namespace Owowagency\LaravelMedia\Tests;
 
 use OwowAgency\Snapshots\MatchesSnapshots;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Owowagency\LaravelBasicMedia\LaravelBasicMediaServiceProvider;
+use Owowagency\LaravelMedia\LaravelMediaServiceProvider;
+use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 
 class TestCase extends BaseTestCase
 {
@@ -60,6 +61,9 @@ class TestCase extends BaseTestCase
      */
     protected function getPackageProviders($app)
     {
-        return [LaravelBasicMediaServiceProvider::class];
+        return [
+            LaravelMediaServiceProvider::class,
+            MediaLibraryServiceProvider::class,
+        ];
     }
 }

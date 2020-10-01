@@ -1,6 +1,6 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Resources;
+namespace Owowagency\LaravelMedia\Resources;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -68,19 +68,17 @@ class MediaResource extends JsonResource
      */
     public function getUrl(string $conversion = ''): string
     {
-        switch ($this->resource->disk) {
-            case 's3':
-                $expiration = now()->addMinutes(
-                    config('filesystems.disks.s3.sign_expiration', 3600)
-                );
+        $createTempUrl = config('laravel-media.temporary_urls', false);
 
-                return $this->resource->getTemporaryUrl($expiration, $conversion);
-                break;
+        if (filter_var($createTempUrl, FILTER_VALIDATE_BOOLEAN)) {
+            $expiration = now()->addMinutes(
+                config('laravel-media.sign_expiration', 60)
+            );
 
-            default:
-                return $this->resource->getFullUrl($conversion);
-                break;
+            return $this->resource->getTemporaryUrl($expiration, $conversion);
         }
+
+        return $this->resource->getFullUrl($conversion);
     }
 
     /**
@@ -88,7 +86,7 @@ class MediaResource extends JsonResource
      *
      * @param  mixed  $resource
      * @param  bool  $forceMediaResource
-     * @return \Owowagency\LaravelBasicMedia\Resources\MediaResourceCollection
+     * @return \Owowagency\LaravelMedia\Resources\MediaResourceCollection
      */
     public static function collection($resource, bool $forceMediaResource = false): MediaResourceCollection
     {

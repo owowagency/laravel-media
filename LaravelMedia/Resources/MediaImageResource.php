@@ -1,6 +1,6 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Resources;
+namespace Owowagency\LaravelMedia\Resources;
 
 class MediaImageResource extends MediaResource
 {

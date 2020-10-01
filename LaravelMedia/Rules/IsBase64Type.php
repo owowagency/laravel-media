@@ -1,9 +1,9 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Rules;
+namespace Owowagency\LaravelMedia\Rules;
 
 use Illuminate\Support\Arr;
-use Owowagency\LaravelBasicMedia\Rules\Concerns\GetsMimeTypeFromBase64;
+use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
 
 class IsBase64Type extends IsBase64
 {
@@ -14,7 +14,7 @@ class IsBase64Type extends IsBase64
      *
      * @var array
      */
-    private array $types;
+    private $types;
 
     /**
      * Create a notification instance.
@@ -50,6 +50,6 @@ class IsBase64Type extends IsBase64
      */
     public function message(): string
     {
-        return __('validation.custom.is_base_64_type');
+        return trans('validation.custom.is_base_64_type');
     }
 }

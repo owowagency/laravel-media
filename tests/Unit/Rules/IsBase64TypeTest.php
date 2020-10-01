@@ -1,16 +1,16 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Tests\Unit\Rules;
+namespace Owowagency\LaravelMedia\Tests\Unit\Rules;
 
-use Owowagency\LaravelBasicMedia\Tests\TestCase;
-use Owowagency\LaravelBasicMedia\Rules\IsBase64Type;
+use Owowagency\LaravelMedia\Tests\TestCase;
+use Owowagency\LaravelMedia\Rules\IsBase64Type;
 
 class IsBase64TypeTest extends TestCase
 {
     /**
      * The IsBase64Type rule instance.
      *
-     * @var \Owowagency\LaravelBasicMedia\Rules\IsBase64Type
+     * @var \Owowagency\LaravelMedia\Rules\IsBase64Type
      */
     private $rule;
 

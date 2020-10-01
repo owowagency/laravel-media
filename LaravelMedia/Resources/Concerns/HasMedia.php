@@ -1,6 +1,6 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Resources\Concerns;
+namespace Owowagency\LaravelMedia\Resources\Concerns;
 
 trait HasMedia
 {
@@ -24,10 +24,10 @@ trait HasMedia
      *
      * @return string
      */
-    private function getImageAttributeName()
+    private function getImageAttributeName(): string
     {
-        if (property_exists($this, 'imageField')) {
-            return $this->imageField;
+        if (property_exists($this, 'imageAttributeName')) {
+            return $this->imageAttributeName;
         }
 
         return 'image';

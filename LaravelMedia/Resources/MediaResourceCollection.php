@@ -1,6 +1,6 @@
 <?php
 
-namespace Owowagency\LaravelBasicMedia\Resources;
+namespace Owowagency\LaravelMedia\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -33,7 +33,7 @@ class MediaResourceCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return $this->resource->map(function (MediaResource $resource) use ($request) {
             $resource->forceMediaResource = $this->forceMediaResource;
