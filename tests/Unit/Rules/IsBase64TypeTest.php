@@ -1,0 +1,66 @@
+<?php
+
+namespace Owowagency\LaravelBasicMedia\Tests\Unit\Rules;
+
+use Owowagency\LaravelBasicMedia\Tests\TestCase;
+use Owowagency\LaravelBasicMedia\Rules\IsBase64Type;
+
+class IsBase64TypeTest extends TestCase
+{
+    /**
+     * The IsBase64Type rule instance.
+     *
+     * @var \Owowagency\LaravelBasicMedia\Rules\IsBase64Type
+     */
+    private $rule;
+
+    /**
+     * A valid base64 string.
+     *
+     * @var string
+     */
+    protected $base64 = 'Ym9keSB7CiAgICBiYWNrZ3JvdW5kOiAjMDAwOwp9Cg==';
+
+    /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setup();
+
+        $this->rule = new IsBase64Type(['text/css', 'text/plain']);
+    }
+
+    /** @test */
+    public function passes_text_css_or_text_plain_file()
+    {
+        $this->assertTrue($this->validate($this->base64));
+    }
+
+    /** @test */
+    public function fails_no_base64()
+    {
+        $this->assertFalse($this->validate('no_base_64'));
+    }
+
+    /** @test */
+    public function fails_no_text_css_or_text_plain_file()
+    {
+        $image = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk/g8AAQsBBD48D9kAAAAASUVORK5CYII=';
+
+        $this->assertFalse($this->validate($image));
+    }
+
+    /**
+     * Validates the rule.
+     *
+     * @param  mixed  $base64
+     * @return bool
+     */
+    private function validate($base64): bool
+    {
+        return $this->rule->passes('', $base64);
+    }
+}

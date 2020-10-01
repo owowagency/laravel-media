@@ -1,0 +1,64 @@
+{
+    "name": "owowagency/laravel-basic-media",
+    "description": "A package with basic media helpers",
+    "keywords": [
+        "owowagency",
+        "laravel-basic-media"
+    ],
+    "homepage": "https://github.com/owowagency/laravel-basic-media",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Thomas van der Veen",
+            "email": "thomas@owow.io"
+        },
+        {
+            "name": "Albert Pratomo",
+            "email": "albert@owow.io"
+        },
+        {
+            "name": "Dees Oomens",
+            "email": "dees@owow.io"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "illuminate/support": "^8.0",
+        "owowagency/laravel-resources": "^3.0",
+        "spatie/laravel-medialibrary": "^8.0.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.2",
+        "owowagency/phpunit-snapshot-assertions": "^0.0.8",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Owowagency\\LaravelBasicMedia\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Owowagency\\LaravelBasicMedia\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Owowagency\\LaravelBasicMedia\\LaravelBasicMediaServiceProvider"
+            ],
+            "aliases": {
+                "MediaManager": "Owowagency\\LaravelBasicMedia\\Facades\\MediaManager"
+            }
+        }
+    }
+}
