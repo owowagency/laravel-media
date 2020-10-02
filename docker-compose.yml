@@ -1,0 +1,26 @@
+version: '3'
+
+networks:
+    laravel-media:
+
+services:
+    mysql_testing:
+        image: mysql:5.7
+        container_name: lm-mysql-testing
+        tmpfs: /var/lib/mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: root
+        networks:
+            - laravel-media
+
+    php:
+        image: thomasowow/laravel-php:7.4
+        container_name: lm-php
+        tty: true
+        volumes:
+            - .:/var/www/html:cached
+        networks:
+            - laravel-media
