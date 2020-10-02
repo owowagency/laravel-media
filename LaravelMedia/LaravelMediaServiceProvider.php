@@ -13,7 +13,7 @@ class LaravelMediaServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadTranslationsFrom(__DIR__.'/../translations', 'laravel-basic-media');
+        $this->loadTranslationsFrom(__DIR__.'/../translations', 'laravel-media');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

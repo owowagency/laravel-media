@@ -1,11 +1,11 @@
 {
-    "name": "owowagency/laravel-basic-media",
+    "name": "owowagency/laravel-media",
     "description": "A package with basic media helpers",
     "keywords": [
         "owowagency",
-        "laravel-basic-media"
+        "laravel-media"
     ],
-    "homepage": "https://github.com/owowagency/laravel-basic-media",
+    "homepage": "https://github.com/owowagency/laravel-media",
     "license": "MIT",
     "type": "library",
     "authors": [

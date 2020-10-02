@@ -13,7 +13,7 @@ class UploadException extends Exception
      */
     public function __construct(string $type = 'string')
     {
-        $message = trans('laravel-basic-media::general.exception', [
+        $message = trans('laravel-media::general.exception', [
             'type' => $type,
         ]);
 

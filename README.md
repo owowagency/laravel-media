@@ -1,9 +1,9 @@
 # Basic Media Library helpers for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/owowagency/laravel-basic-media.svg?style=flat-square)](https://packagist.org/packages/owowagency/laravel-basic-media)
-[![Build Status](https://img.shields.io/travis/owowagency/laravel-basic-media/master.svg?style=flat-square)](https://travis-ci.org/owowagency/laravel-basic-media)
-[![Quality Score](https://img.shields.io/scrutinizer/g/owowagency/laravel-basic-media.svg?style=flat-square)](https://scrutinizer-ci.com/g/owowagency/laravel-basic-media)
-[![Total Downloads](https://img.shields.io/packagist/dt/owowagency/laravel-basic-media.svg?style=flat-square)](https://packagist.org/packages/owowagency/laravel-basic-media)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/owowagency/laravel-media.svg?style=flat-square)](https://packagist.org/packages/owowagency/laravel-media)
+[![Build Status](https://img.shields.io/travis/owowagency/laravel-media/master.svg?style=flat-square)](https://travis-ci.org/owowagency/laravel-media)
+[![Quality Score](https://img.shields.io/scrutinizer/g/owowagency/laravel-media.svg?style=flat-square)](https://scrutinizer-ci.com/g/owowagency/laravel-media)
+[![Total Downloads](https://img.shields.io/packagist/dt/owowagency/laravel-media.svg?style=flat-square)](https://packagist.org/packages/owowagency/laravel-media)
 
 This package offers basic helpers for the [Media Library](https://github.com/spatie/laravel-medialibrary) package. It supports:
 - A media manager
@@ -15,7 +15,7 @@ This package offers basic helpers for the [Media Library](https://github.com/spa
 You can install the package via composer:
 
 ```bash
-composer require owowagency/laravel-basic-media
+composer require owowagency/laravel-media
 ```
 
 ### Testing

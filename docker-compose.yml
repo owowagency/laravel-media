@@ -1,7 +1,7 @@
 version: '3'
 
 networks:
-    laravel-basic-media:
+    laravel-media:
 
 services:
     mysql_testing:
@@ -14,13 +14,13 @@ services:
             MYSQL_DATABASE: laravel
             MYSQL_USER: root
         networks:
-            - laravel-basic-media
+            - laravel-media
 
     php:
         image: thomasowow/laravel-php:7.4
-        container_name: lbm-php
+        container_name: lm-php
         tty: true
         volumes:
             - .:/var/www/html:cached
         networks:
-            - laravel-basic-media
+            - laravel-media
