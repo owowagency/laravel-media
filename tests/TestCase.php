@@ -4,8 +4,8 @@ namespace Owowagency\LaravelMedia\Tests;
 
 use OwowAgency\Snapshots\MatchesSnapshots;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Owowagency\LaravelMedia\LaravelMediaServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
+use Owowagency\LaravelMedia\LaravelMediaServiceProvider;
 
 class TestCase extends BaseTestCase
 {
@@ -32,25 +32,6 @@ class TestCase extends BaseTestCase
 
         // Run the tests' migrations.
         $this->loadMigrationsFrom(__DIR__.'/Support/database/migrations');
-    }
-
-    /**
-     * Define environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['config']->set(
-            'media-library.path_generator',
-            \Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator::class,
-        );
-
-        $app['config']->set(
-            'media-library.url_generator',
-            \Spatie\MediaLibrary\Support\UrlGenerator\DefaultUrlGenerator::class,
-        );
     }
 
     /**

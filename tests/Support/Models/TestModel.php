@@ -1,6 +1,6 @@
 <?php
 
-namespace Owowagency\LaravelMedia\Tests\Support\App\Models;
+namespace Owowagency\LaravelMedia\Tests\Support\Models;
 
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;

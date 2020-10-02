@@ -5,7 +5,7 @@ namespace Owowagency\LaravelMedia\Tests\Unit\Resources;
 use Owowagency\LaravelMedia\Tests\TestCase;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Owowagency\LaravelMedia\Resources\MediaImageResource;
-use Owowagency\LaravelMedia\Tests\Support\App\Models\TestModel;
+use Owowagency\LaravelMedia\Tests\Support\Models\TestModel;
 
 class ImageResourceTest extends TestCase
 {

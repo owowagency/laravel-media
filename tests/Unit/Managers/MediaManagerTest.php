@@ -7,7 +7,7 @@ use Owowagency\LaravelMedia\Tests\TestCase;
 use Owowagency\LaravelMedia\Managers\MediaManager;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\MediaCollections\FileAdderFactory;
-use Owowagency\LaravelMedia\Tests\Support\App\Models\TestModel;
+use Owowagency\LaravelMedia\Tests\Support\Models\TestModel;
 
 class MediaManagerTest extends TestCase
 {
@@ -54,7 +54,7 @@ class MediaManagerTest extends TestCase
             'file' => $this->base64,
         ]);
 
-        $this->assertEquals($media, $result);
+        $this->assertEquals([$media], $result);
     }
 
     /** @test */
@@ -73,7 +73,7 @@ class MediaManagerTest extends TestCase
 
         $result = MediaManager::upload($model, $this->base64);
 
-        $this->assertEquals($media, $result);
+        $this->assertEquals([$media], $result);
     }
 
     /** @test */

@@ -15,13 +15,14 @@ class MediaManager
     use GetsMimeTypeFromBase64;
 
     /**
-     * Determine how to upload media.
+     * Upload media without specifying the type. Currently this method can
+     * upload a string or an array of strings (base64 string).
      *
      * @param  \Spatie\MediaLibrary\HasMedia  $model
-     * @param  mixed  $media
+     * @param  string|array  $media
      * @param  string|null  $name
      * @param  string  $collection
-     * @return mixed
+     * @return Media[]
      *
      * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
      */
@@ -30,14 +31,14 @@ class MediaManager
         $media,
         string $name = null,
         string $collection = 'default'
-    ) {
+    ): array {
         if (is_array($media)) {
             $uploads = [];
 
             if (Arr::isAssoc($media)) {
                 return static::upload(
                     $model,
-                    ...static::uploadParamsFromArray($media),
+                    ...static::getUploadParams($media),
                 );
             }
 
@@ -45,10 +46,10 @@ class MediaManager
                 $uploads[] = static::upload($model, $value);
             }
 
-            return $uploads;
+            return Arr::flatten($uploads);
         } else {
             if (is_string($media)) {
-                return static::uploadFromString($model, $media, $name, $collection);
+                return [static::uploadFromString($model, $media, $name, $collection)];
             }
         }
 
@@ -152,7 +153,7 @@ class MediaManager
      * @param  array  $data
      * @return array
      */
-    public static function uploadParamsFromArray(array $data): array
+    public static function getUploadParams(array $data): array
     {
         return array_values(Arr::only(
             $data,

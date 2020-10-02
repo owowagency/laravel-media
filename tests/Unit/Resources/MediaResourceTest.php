@@ -4,9 +4,9 @@ namespace Owowagency\LaravelMedia\Tests\Unit\Resources;
 
 use Mockery;
 use Owowagency\LaravelMedia\Tests\TestCase;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Owowagency\LaravelMedia\Resources\MediaResource;
-use Owowagency\LaravelMedia\Tests\Support\App\Models\TestModel;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Owowagency\LaravelMedia\Tests\Support\Models\TestModel;
 
 class MediaResourceTest extends TestCase
 {

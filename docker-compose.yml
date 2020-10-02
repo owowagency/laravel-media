@@ -6,7 +6,7 @@ networks:
 services:
     mysql_testing:
         image: mysql:5.7
-        container_name: ln-mysql-testing
+        container_name: lm-mysql-testing
         tmpfs: /var/lib/mysql
         restart: unless-stopped
         environment:
