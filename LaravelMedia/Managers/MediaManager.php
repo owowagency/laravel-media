@@ -2,13 +2,13 @@
 
 namespace Owowagency\LaravelMedia\Managers;
 
-use Illuminate\Support\Arr;
 use Mimey\MimeTypes;
-use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
+use Illuminate\Support\Arr;
 use Spatie\MediaLibrary\HasMedia;
 use Owowagency\LaravelMedia\Rules\IsBase64;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Owowagency\LaravelMedia\Exceptions\UploadException;
+use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
 
 class MediaManager
 {
