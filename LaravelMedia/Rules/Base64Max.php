@@ -32,13 +32,13 @@ class Base64Max extends IsBase64
      */
     public function passes($attribute, $value)
     {
+        $values = Arr::wrap($value);
+
         // Before we can validate the size we need to make sure that all values
         // are a base64 string.
-        if (! parent::passes($attribute, $value)) {
+        if (! parent::passes($attribute, $values)) {
             return false;
         }
-
-        $values = Arr::wrap($value);
 
         $size = array_reduce($values, function ($carry, $value) {
             return $carry + $this->getSize($value);

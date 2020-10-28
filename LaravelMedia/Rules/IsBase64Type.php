@@ -3,11 +3,11 @@
 namespace Owowagency\LaravelMedia\Rules;
 
 use Illuminate\Support\Arr;
-use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
+use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
 
 class IsBase64Type extends IsBase64
 {
-    use GetsMimeTypeFromBase64;
+    use ValidatesBase64;
 
     /**
      * The base64 types to check in the test.

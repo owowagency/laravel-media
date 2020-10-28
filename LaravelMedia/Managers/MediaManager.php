@@ -8,11 +8,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Owowagency\LaravelMedia\Rules\IsBase64;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Owowagency\LaravelMedia\Exceptions\UploadException;
-use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
+use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
 
 class MediaManager
 {
-    use GetsMimeTypeFromBase64;
+    use ValidatesBase64;
 
     /**
      * Upload media without specifying the type. Currently this method can

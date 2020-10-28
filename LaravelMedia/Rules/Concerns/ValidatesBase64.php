@@ -2,7 +2,7 @@
 
 namespace Owowagency\LaravelMedia\Rules\Concerns;
 
-trait GetsMimeTypeFromBase64
+trait ValidatesBase64
 {
     /**
      * Reads mime type of string by using file info buffer.

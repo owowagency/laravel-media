@@ -27,6 +27,14 @@ class Base64MaxTest extends TestCase
     }
 
     /** @test */
+    public function passes_base64max_array(): void
+    {
+        $base64 = [$this->base64, $this->base64];
+
+        $this->assertTrue($this->validate($base64, 0.06640626 * 2));
+    }
+
+    /** @test */
     public function fails_base64max_bigger(): void
     {
         $this->assertFalse($this->validate($this->base64, 0.06640624));

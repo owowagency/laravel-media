@@ -4,11 +4,11 @@ namespace Owowagency\LaravelMedia\Rules;
 
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Validation\Rule;
-use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
+use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
 
 class IsBase64 implements Rule
 {
-    use GetsMimeTypeFromBase64;
+    use ValidatesBase64;
 
     /**
      * Determine if the validation rule passes.
