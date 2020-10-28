@@ -39,4 +39,15 @@ trait GetsMimeTypeFromBase64
 
         return $value;
     }
+
+    /**
+     * Returns the size of a base64 string in kilobytes.
+     *
+     * @param  string  $value
+     * @return float
+     */
+    protected function getSize(string $value): float
+    {
+        return ((float) strlen(base64_decode($value))) / 1024;
+    }
 }
