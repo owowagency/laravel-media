@@ -2,12 +2,13 @@
 
 namespace Owowagency\LaravelMedia\Rules;
 
+use Illuminate\Support\Arr;
 use Illuminate\Contracts\Validation\Rule;
-use Owowagency\LaravelMedia\Rules\Concerns\GetsMimeTypeFromBase64;
+use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
 
 class IsBase64 implements Rule
 {
-    use GetsMimeTypeFromBase64;
+    use ValidatesBase64;
 
     /**
      * Determine if the validation rule passes.
@@ -18,7 +19,17 @@ class IsBase64 implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $this->isBase64($value);
+        $values = Arr::wrap($value);
+
+        foreach ($values as $value) {
+            if (! $this->isBase64($value)) {
+                return false;
+            }
+        }
+
+        // All base64 strings are valid. Now we only need to verify if there
+        // where any base64 strings at all.
+        return count($values) > 0;
     }
 
     /**

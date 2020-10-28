@@ -63,6 +63,12 @@ class IsBase64Test extends TestCase
     /** @test */
     public function fails_no_string()
     {
+        $this->assertFalse($this->validate(1));
+    }
+
+    /** @test */
+    public function fails_empty_array()
+    {
         $this->assertFalse($this->validate([]));
     }
 

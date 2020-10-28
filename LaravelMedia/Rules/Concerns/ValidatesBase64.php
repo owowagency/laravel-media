@@ -2,7 +2,7 @@
 
 namespace Owowagency\LaravelMedia\Rules\Concerns;
 
-trait GetsMimeTypeFromBase64
+trait ValidatesBase64
 {
     /**
      * Reads mime type of string by using file info buffer.
@@ -38,5 +38,16 @@ trait GetsMimeTypeFromBase64
         }
 
         return $value;
+    }
+
+    /**
+     * Returns the size of a base64 string in kilobytes.
+     *
+     * @param  string  $value
+     * @return float
+     */
+    protected function getSize(string $value): float
+    {
+        return ((float) strlen(base64_decode($value))) / 1024;
     }
 }
