@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "illuminate/support": "^8.0",
         "owowagency/laravel-resources": "^3.0",
         "ralouphie/mimey": "^2.1",
