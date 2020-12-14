@@ -50,6 +50,6 @@ class IsBase64Type extends IsBase64
      */
     public function message(): string
     {
-        return trans('validation.custom.is_base_64_type');
+        return trans('validation.custom.is_base_64_type', ['type' => implode(',', $this->types)]);
     }
 }

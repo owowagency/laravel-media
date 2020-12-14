@@ -4,16 +4,16 @@ namespace Owowagency\LaravelMedia\Rules;
 
 use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
 
-class IsBase64Image extends StartsWithMimeType
+class IsBase64Audio extends StartsWithMimeType
 {
     use ValidatesBase64;
 
     /**
-     * IsBase64Image constructor.
+     * IsBase64Audio constructor.
      */
     public function __construct()
     {
-        parent::__construct('image');
+        parent::__construct('audio');
     }
 
     /**
@@ -23,6 +23,6 @@ class IsBase64Image extends StartsWithMimeType
      */
     public function message(): string
     {
-        return trans('validation.custom.is_base_64_image');
+        return trans('validation.custom.is_base_64_audio');
     }
 }
