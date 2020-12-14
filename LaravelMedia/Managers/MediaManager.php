@@ -43,7 +43,7 @@ class MediaManager
             }
 
             foreach ($media as $value) {
-                $uploads[] = static::upload($model, $value);
+                $uploads[] = static::upload($model, $value, $name, $collection);
             }
 
             return Arr::flatten($uploads);
