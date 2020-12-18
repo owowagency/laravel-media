@@ -2,5 +2,6 @@
     "id": 1,
     "file_name": "some_file_name",
     "size": 9999,
+    "mime_type": "image",
     "url": "http:\/\/localhost\/storage\/1\/some_file_name"
 }
