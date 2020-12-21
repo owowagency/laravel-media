@@ -2,12 +2,10 @@
 
 namespace Owowagency\LaravelMedia\Rules;
 
-use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
-
 class IsBase64MimeType extends BaseTypeRule
 {
     /**
-     * Checks if base64 is image.
+     * Checks if base64 has a valid MIME type
      *
      * @param  string  $mimeType
      * @return bool
