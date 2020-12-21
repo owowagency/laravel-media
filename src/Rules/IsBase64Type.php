@@ -14,6 +14,6 @@ class IsBase64Type extends BaseTypeRule
     {
         $exploded = explode('/', $mimeType);
 
-        return ($exploded[0] == $this->type);
+        return $exploded[0] == $this->type;
     }
 }
