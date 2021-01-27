@@ -79,7 +79,7 @@ class MediaManager
         if ($base64Rule->passes('', $string)) {
             return static::uploadFromBase64($model, $string, $name, $collection);
         } elseif (filter_var($string, FILTER_VALIDATE_URL) !== false) {
-            return static::uploadFromUrl($model, $string);
+            return static::uploadFromUrl($model, $string, $collection);
         }
 
         throw new UploadException();
