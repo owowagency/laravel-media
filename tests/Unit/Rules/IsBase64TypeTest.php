@@ -30,11 +30,21 @@ class IsBase64TypeTest extends TestCase
     {
         parent::setup();
 
-        $this->rule = new IsBase64Type(['text/css', 'text/plain']);
+        $this->rule = new IsBase64Type('text');
     }
 
     /** @test */
-    public function passes_text_css_or_text_plain_file()
+    public function passes_images()
+    {
+        $this->rule = new IsBase64Type('image');
+
+        $image = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk/g8AAQsBBD48D9kAAAAASUVORK5CYII=';
+
+        $this->assertTrue($this->validate($image));
+    }
+
+    /** @test */
+    public function passes_text_css_file()
     {
         $this->assertTrue($this->validate($this->base64));
     }
@@ -46,7 +56,7 @@ class IsBase64TypeTest extends TestCase
     }
 
     /** @test */
-    public function fails_no_text_css_or_text_plain_file()
+    public function fails_no_text_css_file()
     {
         $image = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk/g8AAQsBBD48D9kAAAAASUVORK5CYII=';
 

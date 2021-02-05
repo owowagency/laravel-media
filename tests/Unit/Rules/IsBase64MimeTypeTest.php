@@ -3,14 +3,14 @@
 namespace Owowagency\LaravelMedia\Tests\Unit\Rules;
 
 use Owowagency\LaravelMedia\Tests\TestCase;
-use Owowagency\LaravelMedia\Rules\IsBase64Type;
+use Owowagency\LaravelMedia\Rules\IsBase64MimeType;
 
-class IsBase64AudioTest extends TestCase
+class IsBase64MimeTypeTest extends TestCase
 {
     /**
-     * The rule instance.
+     * The IsBase64MimeType rule instance.
      *
-     * @var \Owowagency\LaravelMedia\Rules\IsBase64Type
+     * @var \Owowagency\LaravelMedia\Rules\IsBase64MimeType
      */
     private $rule;
 
@@ -23,28 +23,27 @@ class IsBase64AudioTest extends TestCase
     {
         parent::setup();
 
-        $this->base64 = file_get_contents(__DIR__ . '/../../Support/content/audio');
-        $this->rule = new IsBase64Type('audio');
+        $this->rule = new IsBase64MimeType('image/png');
     }
 
     /** @test */
-    public function passes_audio()
+    public function passes_valid_mime_type()
     {
         $this->assertTrue($this->validate($this->base64));
+    }
+
+    /** @test */
+    public function fails_invalid_mime_type()
+    {
+        $txt = 'SWsgaGViIGluIGVlbiBwbGFudGVuYmFrIGdla29zdHMK';
+
+        $this->assertFalse($this->validate($txt));
     }
 
     /** @test */
     public function fails_no_base64()
     {
         $this->assertFalse($this->validate('no_base_64'));
-    }
-
-    /** @test */
-    public function fails_no_audio()
-    {
-        $txt = 'SWsgaGViIGluIGVlbiBwbGFudGVuYmFrIGdla29zdHMK';
-
-        $this->assertFalse($this->validate($txt));
     }
 
     /**

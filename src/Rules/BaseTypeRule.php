@@ -4,25 +4,25 @@ namespace Owowagency\LaravelMedia\Rules;
 
 use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
 
-class StartsWithMimeType extends IsBase64
+abstract class BaseTypeRule extends IsBase64
 {
     use ValidatesBase64;
 
     /**
-     * The mime type to validate.
+     * The type to validate.
      *
      * @var string
      */
-    protected $mimeType;
+    protected $type;
 
     /**
      * StartsWithMimeType constructor.
      *
-     * @param  string  $mimeType
+     * @param  string  $type
      */
-    public function __construct(string $mimeType)
+    public function __construct(string $type)
     {
-        $this->mimeType = $mimeType;
+        $this->type = $type;
     }
 
     /**
@@ -38,23 +38,16 @@ class StartsWithMimeType extends IsBase64
             return false;
         }
 
-        return $this->startsWithMimeType($value);
+        return $this->validateType($this->getMimeType($value));
     }
 
     /**
-     * Checks if base64 is image.
+     * Checks if base64 has valid type.
      *
-     * @param  string  $value
+     * @param  string  $mimeType
      * @return bool
      */
-    protected function startsWithMimeType(string $value): bool
-    {
-        $mimeType = $this->getMimeType($value);
-
-        $exploded = explode('/', $mimeType);
-
-        return ($exploded[0] == $this->mimeType);
-    }
+    abstract protected function validateType(string $mimeType): bool;
 
     /**
      * Get the validation error message.
@@ -63,6 +56,6 @@ class StartsWithMimeType extends IsBase64
      */
     public function message(): string
     {
-        return trans('validation.custom.is_base_64_type', ['type' => $this->mimeType]);
+        return trans('validation.custom.is_base_64_type', ['type' => $this->type]);
     }
 }

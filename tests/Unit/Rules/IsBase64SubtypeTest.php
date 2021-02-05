@@ -1,16 +1,16 @@
 <?php
 
-namespace Owowagency\LaravelMedia\Tests\Rules;
+namespace Owowagency\LaravelMedia\Tests\Unit\Rules;
 
 use Owowagency\LaravelMedia\Tests\TestCase;
-use Owowagency\LaravelMedia\Rules\IsBase64Image;
+use Owowagency\LaravelMedia\Rules\IsBase64Subtype;
 
-class IsBase64ImageTest extends TestCase
+class IsBase64SubtypeTest extends TestCase
 {
     /**
-     * The IsBase64Image rule instance.
+     * The IsBase64Type rule instance.
      *
-     * @var \Owowagency\LaravelMedia\Rules\IsBase64Image
+     * @var \Owowagency\LaravelMedia\Rules\IsBase64Type
      */
     private $rule;
 
@@ -23,7 +23,7 @@ class IsBase64ImageTest extends TestCase
     {
         parent::setup();
 
-        $this->rule = new IsBase64Image;
+        $this->rule = new IsBase64Subtype('png');
     }
 
     /** @test */
