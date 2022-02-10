@@ -17,7 +17,7 @@ services:
             - laravel-media
 
     php:
-        image: thomasowow/laravel-php:7.4
+        image: owow/laravel-php:8.1
         container_name: lm-php
         tty: true
         volumes:
