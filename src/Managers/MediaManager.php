@@ -38,7 +38,7 @@ class MediaManager
             if (Arr::isAssoc($media)) {
                 return $this->upload(
                     $model,
-                    ...$this->etUploadParams($media),
+                    ...$this->getUploadParams($media),
                 );
             }
 
