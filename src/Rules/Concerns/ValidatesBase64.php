@@ -10,9 +10,9 @@ trait ValidatesBase64
      * @param  string  $value
      * @return string
      */
-    protected static function getMimeType(string $value): string
+    protected function getMimeType(string $value): string
     {
-        $fileData = base64_decode(static::removeScheme($value));
+        $fileData = base64_decode($this->removeScheme($value));
 
         $f = finfo_open();
 
@@ -29,7 +29,7 @@ trait ValidatesBase64
      * @param  string  $value
      * @return string
      */
-    protected static function removeScheme(string $value): string
+    protected function removeScheme(string $value): string
     {
         if (strpos($value, ';base64') !== false) {
             list(, $value) = explode(';', $value);
