@@ -26,7 +26,7 @@ class MediaManager
      *
      * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
      */
-    public static function upload(
+    public function upload(
         HasMedia $model,
         $media,
         string $name = null,
@@ -36,20 +36,20 @@ class MediaManager
             $uploads = [];
 
             if (Arr::isAssoc($media)) {
-                return static::upload(
+                return $this->upload(
                     $model,
-                    ...static::getUploadParams($media),
+                    ...$this->etUploadParams($media),
                 );
             }
 
             foreach ($media as $value) {
-                $uploads[] = static::upload($model, $value, $name, $collection);
+                $uploads[] = $this->upload($model, $value, $name, $collection);
             }
 
             return Arr::flatten($uploads);
         } else {
             if (is_string($media)) {
-                return [static::uploadFromString($model, $media, $name, $collection)];
+                return [$this->uploadFromString($model, $media, $name, $collection)];
             }
         }
 
@@ -68,7 +68,7 @@ class MediaManager
      *
      * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
      */
-    public static function uploadFromString(
+    public function uploadFromString(
         HasMedia $model,
         string $string,
         $name = null,
@@ -77,9 +77,9 @@ class MediaManager
         $base64Rule = new IsBase64();
 
         if ($base64Rule->passes('', $string)) {
-            return static::uploadFromBase64($model, $string, $name, $collection);
+            return $this->uploadFromBase64($model, $string, $name, $collection);
         } elseif (filter_var($string, FILTER_VALIDATE_URL) !== false) {
-            return static::uploadFromUrl($model, $string, $collection);
+            return $this->uploadFromUrl($model, $string, $collection);
         }
 
         throw new UploadException();
@@ -94,7 +94,7 @@ class MediaManager
      * @param  string  $collection
      * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
      */
-    public static function uploadFromBase64(
+    public function uploadFromBase64(
         HasMedia $model,
         string $string,
         $name = null,
@@ -110,7 +110,7 @@ class MediaManager
 
                 $mimes = new MimeTypes();
 
-                $extension[1] = $mimes->getExtension(static::getMimeType($string));
+                $extension[1] = $mimes->getExtension($this->getMimeType($string));
             } else {
                 $format = '%s.%s';
             }
@@ -138,7 +138,7 @@ class MediaManager
      * @param  string  $collection
      * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
      */
-    public static function uploadFromUrl(
+    public function uploadFromUrl(
         HasMedia $model,
         string $string,
         string $collection = 'default'
@@ -153,7 +153,7 @@ class MediaManager
      * @param  array  $data
      * @return array
      */
-    public static function getUploadParams(array $data): array
+    public function getUploadParams(array $data): array
     {
         return array_values(Arr::only(
             $data,

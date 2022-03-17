@@ -13,6 +13,18 @@ class MediaManagerTest extends TestCase
 {
     private $url = 'https://some-url.come';
 
+    protected MediaManager $mediaManager;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->mediaManager = new MediaManager();
+    }
+
     /** @test */
     public function upload_array()
     {
@@ -31,7 +43,7 @@ class MediaManagerTest extends TestCase
             ->with($this->url)
             ->andReturn($fileAdder);
 
-        $result = MediaManager::upload($model, [$this->base64, $this->url]);
+        $result = $this->mediaManager->upload($model, [$this->base64, $this->url]);
 
         $this->assertEquals([$media, $media], $result);
     }
@@ -50,7 +62,7 @@ class MediaManagerTest extends TestCase
             ->with($this->base64)
             ->andReturn($fileAdder);
 
-        $result = MediaManager::upload($model, [
+        $result = $this->mediaManager->upload($model, [
             'file' => $this->base64,
         ]);
 
@@ -71,7 +83,7 @@ class MediaManagerTest extends TestCase
             ->with($this->base64)
             ->andReturn($fileAdder);
 
-        $result = MediaManager::upload($model, $this->base64);
+        $result = $this->mediaManager->upload($model, $this->base64);
 
         $this->assertEquals([$media], $result);
     }
@@ -102,7 +114,7 @@ class MediaManagerTest extends TestCase
             ->with($this->base64)
             ->andReturn($fileAdder);
 
-        $result = MediaManager::uploadFromBase64($model, $this->base64, $name);
+        $result = $this->mediaManager->uploadFromBase64($model, $this->base64, $name);
 
         $this->assertEquals($media, $result);
     }
