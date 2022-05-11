@@ -11,7 +11,7 @@ class Base64Max extends IsBase64
      *
      * @var float
      */
-    protected $size;
+    protected float $size;
 
     /**
      * The Base64Max constructor.
@@ -54,8 +54,15 @@ class Base64Max extends IsBase64
      */
     public function message(): string
     {
-        return trans('validation.max.file', [
-            'max' => $this->size,
+        $base = 1000;
+
+        $units = ['KB', 'MB', 'GB', 'TB'];
+
+        $pow = floor(log($this->size) / log($base));
+
+        return trans('validation.max.file_with_unit', [
+            'max' => $this->size / pow($base, $pow),
+            'unit' => $units[$pow],
         ]);
     }
 }
