@@ -13,6 +13,10 @@ class LaravelMediaServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->publishes([
+            __DIR__.'/../translations' => $this->app->langPath('vendor/laravel-media'),
+        ]);
+
         $this->loadTranslationsFrom(__DIR__.'/../translations', 'laravel-media');
 
         if ($this->app->runningInConsole()) {

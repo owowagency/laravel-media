@@ -12,7 +12,6 @@ services:
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
             MYSQL_DATABASE: laravel
-            MYSQL_USER: root
         networks:
             - laravel-media
 
