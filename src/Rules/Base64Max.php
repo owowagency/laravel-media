@@ -56,12 +56,15 @@ class Base64Max extends IsBase64
     {
         $base = 1000;
 
-        $units = ['KB', 'MB', 'GB', 'TB'];
+        // to get the byte 🍑
+        $size = $this->size * $base;
 
-        $pow = floor(log($this->size) / log($base));
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
 
-        return trans('validation.max.file_with_unit', [
-            'max' => $this->size / pow($base, $pow),
+        $pow = floor(log($size) / log($base));
+
+        return trans('laravel-media::validation.max.file_with_unit', [
+            'max' => $size / pow($base, $pow),
             'unit' => $units[$pow],
         ]);
     }
