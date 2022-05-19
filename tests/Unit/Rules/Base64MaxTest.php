@@ -54,9 +54,12 @@ class Base64MaxTest extends TestCase
             'validation.max.file_with_unit' => 'The :attribute must not be greater than :max :unit.',
         ], Lang::getLocale(), 'laravel-media');
 
-        $rule = new Base64Max(12000);
+        // Loop through every unit starting with byte to terabyte
+        for ($i = 0; $i < 5; $i++) {
+            $rule = new Base64Max(0.012 * pow(1000, $i));
 
-        $this->assertMatchesSnapshot($rule->message());
+            $this->assertMatchesSnapshot($rule->message());
+        }
     }
 
     /**
