@@ -11,7 +11,7 @@ class Base64Max extends IsBase64
      *
      * @var float
      */
-    protected $size;
+    protected float $size;
 
     /**
      * The Base64Max constructor.
@@ -54,8 +54,18 @@ class Base64Max extends IsBase64
      */
     public function message(): string
     {
-        return trans('validation.max.file', [
-            'max' => $this->size,
+        $base = 1000;
+
+        // to get the byte 🍑
+        $size = $this->size * $base;
+
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+
+        $pow = floor(log($size) / log($base));
+
+        return trans('laravel-media::validation.max.file_with_unit', [
+            'max' => $size / pow($base, $pow),
+            'unit' => $units[$pow],
         ]);
     }
 }

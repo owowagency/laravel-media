@@ -2,8 +2,9 @@
 
 namespace Owowagency\LaravelMedia\Tests\Unit\Rules;
 
-use Owowagency\LaravelMedia\Tests\TestCase;
+use Illuminate\Support\Facades\Lang;
 use Owowagency\LaravelMedia\Rules\Base64Max;
+use Owowagency\LaravelMedia\Tests\TestCase;
 
 class Base64MaxTest extends TestCase
 {
@@ -44,6 +45,21 @@ class Base64MaxTest extends TestCase
     public function fails_base64max_non_base64(): void
     {
         $this->assertFalse($this->validate('no_base64', 0.06640625));
+    }
+
+    /** @test */
+    public function it_returns_correct_message_on_fail(): void
+    {
+        Lang::addLines([
+            'validation.max.file_with_unit' => 'The :attribute must not be greater than :max :unit.',
+        ], Lang::getLocale(), 'laravel-media');
+
+        // Loop through every unit starting with byte to terabyte
+        for ($i = 0; $i < 5; $i++) {
+            $rule = new Base64Max(0.012 * pow(1000, $i));
+
+            $this->assertMatchesSnapshot($rule->message());
+        }
     }
 
     /**
