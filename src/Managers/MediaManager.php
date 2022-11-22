@@ -22,6 +22,7 @@ class MediaManager
      * @param  string|array  $media
      * @param  string|null  $name
      * @param  string  $collection
+     * @param  array  $customProperties
      * @return Media[]
      *
      * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
@@ -30,7 +31,8 @@ class MediaManager
         HasMedia $model,
         $media,
         string $name = null,
-        string $collection = 'default'
+        string $collection = 'default',
+        array $customProperties = []
     ): array {
         if (is_array($media)) {
             $uploads = [];
@@ -43,13 +45,13 @@ class MediaManager
             }
 
             foreach ($media as $value) {
-                $uploads[] = $this->upload($model, $value, $name, $collection);
+                $uploads[] = $this->upload($model, $value, $name, $collection, $customProperties);
             }
 
             return Arr::flatten($uploads);
         } else {
             if (is_string($media)) {
-                return [$this->uploadFromString($model, $media, $name, $collection)];
+                return [$this->uploadFromString($model, $media, $name, $collection, $customProperties)];
             }
         }
 
@@ -64,6 +66,7 @@ class MediaManager
      * @param  string  $string
      * @param  string|null  $name
      * @param  string  $collection
+     * @param  array  $customProperties
      * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
      *
      * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
@@ -72,14 +75,15 @@ class MediaManager
         HasMedia $model,
         string $string,
         $name = null,
-        string $collection = 'default'
+        string $collection = 'default',
+        array $customProperties = []
     ): Media {
         $base64Rule = new IsBase64();
 
         if ($base64Rule->passes('', $string)) {
-            return $this->uploadFromBase64($model, $string, $name, $collection);
+            return $this->uploadFromBase64($model, $string, $name, $collection, $customProperties);
         } elseif (filter_var($string, FILTER_VALIDATE_URL) !== false) {
-            return $this->uploadFromUrl($model, $string, $collection);
+            return $this->uploadFromUrl($model, $string, $collection, $customProperties);
         }
 
         throw new UploadException();
@@ -92,13 +96,15 @@ class MediaManager
      * @param  string  $string
      * @param  string|null  $name
      * @param  string  $collection
+     * @param  array  $customProperties
      * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
      */
     public function uploadFromBase64(
         HasMedia $model,
         string $string,
         $name = null,
-        string $collection = 'default'
+        string $collection = 'default',
+        array $customProperties = []
     ): Media {
         $fileAdder = $model->addMediaFromBase64($string);
 
@@ -127,7 +133,7 @@ class MediaManager
 
         $media = $fileAdder->toMediaCollection($collection);
 
-        return $media;
+        return $this->setCustomProperties($media, $customProperties);
     }
 
     /**
@@ -136,15 +142,19 @@ class MediaManager
      * @param  \Spatie\MediaLibrary\HasMedia  $model
      * @param  string  $string
      * @param  string  $collection
+     * @param  array  $customProperties
      * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
      */
     public function uploadFromUrl(
         HasMedia $model,
         string $string,
-        string $collection = 'default'
+        string $collection = 'default',
+        array $customProperties = []
     ): Media {
-        return $model->addMediaFromUrl($string)
+        $media = $model->addMediaFromUrl($string)
             ->toMediaCollection($collection);
+
+        return $this->setCustomProperties($media, $customProperties);
     }
 
     /**
@@ -159,5 +169,17 @@ class MediaManager
             $data,
             ['file', 'name', 'collection'],
         ));
+    }
+
+    /**
+     * Set multiple custom properties to the media.
+     */
+    public function setCustomProperties(Media $media, array $customProperties = []): Media
+    {
+        foreach ($customProperties as $key => $value) {
+            $media->setCustomProperty($key, $value);
+        }
+
+        return $media;
     }
 }
