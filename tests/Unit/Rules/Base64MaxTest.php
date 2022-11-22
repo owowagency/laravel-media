@@ -64,10 +64,6 @@ class Base64MaxTest extends TestCase
 
     /**
      * Validates the rule.
-     *
-     * @param  mixed  $base64
-     * @param  float  $size
-     * @return bool
      */
     private function validate($base64, float $size): bool
     {

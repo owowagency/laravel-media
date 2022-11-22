@@ -6,9 +6,6 @@ trait HasMedia
 {
     /**
      * Adds the image when loaded.
-     *
-     * @param  array  &$data
-     * @return void
      */
     private function addImage(array &$data): void
     {
@@ -21,8 +18,6 @@ trait HasMedia
 
     /**
      * Get the attribute name for the image.
-     *
-     * @return string
      */
     private function getImageAttributeName(): string
     {

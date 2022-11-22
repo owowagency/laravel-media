@@ -19,7 +19,6 @@ class IsBase64Type extends IsBase64
     /**
      * Create a notification instance.
      *
-     * @param  string|array  $type
      * @return void
      */
     public function __construct($types)
@@ -31,10 +30,8 @@ class IsBase64Type extends IsBase64
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         if (! $this->isBase64($value)) {
             return false;
@@ -45,8 +42,6 @@ class IsBase64Type extends IsBase64
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
     public function message(): string
     {

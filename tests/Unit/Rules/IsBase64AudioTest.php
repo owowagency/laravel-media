@@ -2,8 +2,8 @@
 
 namespace Owowagency\LaravelMedia\Tests\Unit\Rules;
 
-use Owowagency\LaravelMedia\Tests\TestCase;
 use Owowagency\LaravelMedia\Rules\IsBase64Audio;
+use Owowagency\LaravelMedia\Tests\TestCase;
 
 class IsBase64AudioTest extends TestCase
 {
@@ -16,14 +16,12 @@ class IsBase64AudioTest extends TestCase
 
     /**
      * Setup the test environment.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
         parent::setup();
 
-        $this->base64 = file_get_contents(__DIR__ . '/../../Support/content/audio');
+        $this->base64 = file_get_contents(__DIR__.'/../../Support/content/audio');
         $this->rule = new IsBase64Audio();
     }
 
@@ -49,9 +47,6 @@ class IsBase64AudioTest extends TestCase
 
     /**
      * Validates the rule.
-     *
-     * @param  mixed  $base64
-     * @return bool
      */
     private function validate($base64): bool
     {

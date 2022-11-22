@@ -18,8 +18,6 @@ class IsBase64Image extends StartsWithMimeType
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
     public function message(): string
     {
