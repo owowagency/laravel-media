@@ -23,8 +23,6 @@ class IsBase64TypeTest extends TestCase
 
     /**
      * Setup the test environment.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -56,8 +54,6 @@ class IsBase64TypeTest extends TestCase
     /**
      * Validates the rule.
      *
-     * @param  mixed  $base64
-     * @return bool
      */
     private function validate($base64): bool
     {

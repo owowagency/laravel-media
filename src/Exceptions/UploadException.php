@@ -8,8 +8,6 @@ class UploadException extends Exception
 {
     /**
      * UploadException constructor.
-     *
-     * @param  string  $type
      */
     public function __construct(string $type = 'string')
     {

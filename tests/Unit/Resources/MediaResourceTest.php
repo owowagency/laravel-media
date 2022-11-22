@@ -107,9 +107,6 @@ class MediaResourceTest extends TestCase
 
     /**
      * Prepares for tests.
-     *
-     * @param  string  $mime
-     * @return array
      */
     private function prepare(string $mime = 'file'): array
     {

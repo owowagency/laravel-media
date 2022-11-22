@@ -83,7 +83,7 @@ class MediaManagerTest extends TestCase
             ->with($this->base64)
             ->andReturn($fileAdder);
 
-        $result = $this->mediaManager->upload($model, $this->base64, null, 'default', [
+        $result = $this->mediaManager->upload($model, $this->base64, customProperties: [
             'property_1' => 'Test custom property 1',
             'property_2' => 'Test custom property 2',
         ]);
@@ -127,8 +127,6 @@ class MediaManagerTest extends TestCase
 
     /**
      * Prepares for tests.
-     *
-     * @return array
      */
     private function prepare(): array
     {

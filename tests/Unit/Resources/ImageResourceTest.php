@@ -21,8 +21,6 @@ class ImageResourceTest extends TestCase
 
     /**
      * Prepares for tests.
-     *
-     * @return array
      */
     private function prepare(): array
     {

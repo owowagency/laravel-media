@@ -42,4 +42,4 @@ jobs:
 
       - name: Code sniffer
         run: |
-          vendor/bin/phpcs -s
+          vendor/bin/php-cs-fixer fix --dry-run --diff
