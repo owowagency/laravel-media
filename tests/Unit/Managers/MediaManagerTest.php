@@ -3,11 +3,11 @@
 namespace Owowagency\LaravelMedia\Tests\Unit\Managers;
 
 use Mockery;
-use Owowagency\LaravelMedia\Tests\TestCase;
 use Owowagency\LaravelMedia\Managers\MediaManager;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\MediaLibrary\MediaCollections\FileAdderFactory;
 use Owowagency\LaravelMedia\Tests\Support\Models\TestModel;
+use Owowagency\LaravelMedia\Tests\TestCase;
+use Spatie\MediaLibrary\MediaCollections\FileAdderFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaManagerTest extends TestCase
 {
@@ -16,7 +16,7 @@ class MediaManagerTest extends TestCase
     protected MediaManager $mediaManager;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {
@@ -106,7 +106,7 @@ class MediaManagerTest extends TestCase
 
         $fileAdder->shouldReceive('usingFileName')
             ->once()
-            ->with($name . '.gif')
+            ->with($name.'.gif')
             ->andReturnSelf();
 
         $fileAdder->shouldReceive('toMediaCollection')
@@ -117,12 +117,12 @@ class MediaManagerTest extends TestCase
             ->with($this->base64)
             ->andReturn($fileAdder);
 
-        $result = $this->mediaManager->uploadFromBase64($model, $this->base64, $name, 'default', [
+        $result = $this->mediaManager->upload($model, $this->base64, $name, customProperties: [
             'property_1' => 'Test custom property 1',
             'property_2' => 'Test custom property 2',
         ]);
 
-        $this->assertEquals($media, $result);
+        $this->assertEquals([$media], $result);
     }
 
     /**

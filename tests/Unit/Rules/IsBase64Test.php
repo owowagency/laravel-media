@@ -47,7 +47,7 @@ class IsBase64Test extends TestCase
     /** @test */
     public function passes_with_scheme()
     {
-        $withScheme = $this->scheme . $this->base64;
+        $withScheme = $this->scheme.$this->base64;
 
         $this->assertTrue($this->validate($withScheme));
     }
@@ -72,7 +72,6 @@ class IsBase64Test extends TestCase
 
     /**
      * Validates the rule.
-     *
      */
     private function validate($base64): bool
     {

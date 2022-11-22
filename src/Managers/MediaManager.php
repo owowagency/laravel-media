@@ -2,13 +2,16 @@
 
 namespace Owowagency\LaravelMedia\Managers;
 
-use Mimey\MimeTypes;
 use Illuminate\Support\Arr;
-use Spatie\MediaLibrary\HasMedia;
-use Owowagency\LaravelMedia\Rules\IsBase64;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Mimey\MimeTypes;
 use Owowagency\LaravelMedia\Exceptions\UploadException;
 use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
+use Owowagency\LaravelMedia\Rules\IsBase64;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\FileAdder;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaManager
 {
@@ -18,60 +21,56 @@ class MediaManager
      * Upload media without specifying the type. Currently this method can
      * upload a string or an array of strings (base64 string).
      *
-     * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
-     * @return Media[]
-     *
+     * @throws FileIsTooBig
+     * @throws FileCannotBeAdded
+     * @throws UploadException
      */
     public function upload(
         HasMedia $model,
-        array|string $media,
+        array|string $files,
         string $name = '',
         string $collection = 'default',
         array $customProperties = [],
     ): array {
-        if (is_array($media)) {
+        if (is_array($files)) {
             $uploads = [];
 
-            if (Arr::isAssoc($media)) {
+            if (Arr::isAssoc($files)) {
                 return $this->upload(
                     $model,
-                    ...$this->getUploadParams($media),
+                    ...$this->getUploadParams($files),
                 );
             }
 
-            foreach ($media as $value) {
-                $uploads[] = $this->upload($model, $value, $name, $collection, $customProperties);
+            foreach ($files as $file) {
+                $uploads[] = $this->upload($model, $file, $name, $collection, $customProperties);
             }
 
             return Arr::flatten($uploads);
-        } else {
-            if (is_string($media)) {
-                return [$this->uploadFromString($model, $media, $name, $collection, $customProperties)];
-            }
+        } elseif (is_string($files)) {
+            $media = $this->uploadFromString($model, $files, $name)->toMediaCollection($collection);
+
+            return [$this->setCustomProperties($media, $customProperties)];
         }
 
-        throw new UploadException(gettype($media));
+        throw new UploadException(gettype($files));
     }
 
     /**
      * Check if the given string is base64. If so, upload
      * the base64 string.
      *
-     * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
+     * @throws UploadException
+     * @throws FileCannotBeAdded
      */
-    public function uploadFromString(
-        HasMedia $model,
-        string $string,
-        string $name = '',
-        string $collection = 'default',
-        array $customProperties = [],
-    ): Media {
+    protected function uploadFromString(HasMedia $model, string $string, string $name = ''): FileAdder
+    {
         $base64Rule = new IsBase64();
 
         if ($base64Rule->passes('', $string)) {
-            return $this->uploadFromBase64($model, $string, $name, $collection, $customProperties);
+            return $this->uploadFromBase64($model, $string, $name);
         } elseif (filter_var($string, FILTER_VALIDATE_URL) !== false) {
-            return $this->uploadFromUrl($model, $string, $collection, $customProperties);
+            return $this->uploadFromUrl($model, $string);
         }
 
         throw new UploadException();
@@ -79,27 +78,20 @@ class MediaManager
 
     /**
      * Saves base64 media to file and adds to collection.
+     *
+     * @throws FileCannotBeAdded
      */
-    public function uploadFromBase64(
-        HasMedia $model,
-        string $string,
-        string $name = '',
-        string $collection = 'default',
-        array $customProperties = [],
-    ): Media {
+    protected function uploadFromBase64(HasMedia $model, string $string, string $name = ''): FileAdder
+    {
         $fileAdder = $model->addMediaFromBase64($string);
 
         preg_match('/data\:\w+\/(.*?)\;/s', $string, $extension);
 
         if (! empty($name)) {
+            $format = '%s.%s';
+
             if (empty($extension)) {
-                $format = '%s.%s';
-
-                $mimes = new MimeTypes();
-
-                $extension[1] = $mimes->getExtension($this->getMimeType($string));
-            } else {
-                $format = '%s.%s';
+                $extension[1] = (new MimeTypes)->getExtension($this->getMimeType($string));
             }
 
             $fileAdder->usingName($name)
@@ -112,30 +104,23 @@ class MediaManager
                 );
         }
 
-        $media = $fileAdder->toMediaCollection($collection);
-
-        return $this->setCustomProperties($media, $customProperties);
+        return $fileAdder;
     }
 
     /**
      * Saves url media to file and adds to collection.
+     *
+     * @throws FileCannotBeAdded
      */
-    public function uploadFromUrl(
-        HasMedia $model,
-        string $string,
-        string $collection = 'default',
-        array $customProperties = [],
-    ): Media {
-        $media = $model->addMediaFromUrl($string)
-            ->toMediaCollection($collection);
-
-        return $this->setCustomProperties($media, $customProperties);
+    protected function uploadFromUrl(HasMedia $model, string $string): FileAdder
+    {
+        return $model->addMediaFromUrl($string);
     }
 
     /**
      * Returns an array that matches the parameters needed to upload.
      */
-    public function getUploadParams(array $data): array
+    protected function getUploadParams(array $data): array
     {
         return array_values(Arr::only(
             $data,

@@ -2,8 +2,8 @@
 
 namespace Owowagency\LaravelMedia\Rules;
 
-use Illuminate\Support\Arr;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Arr;
 use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
 
 class IsBase64 implements Rule

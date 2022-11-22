@@ -46,7 +46,7 @@ class StartsWithMimeType extends IsBase64
 
         $exploded = explode('/', $mimeType);
 
-        return ($exploded[0] == $this->mimeType);
+        return $exploded[0] == $this->mimeType;
     }
 
     /**

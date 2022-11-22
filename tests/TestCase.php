@@ -2,10 +2,10 @@
 
 namespace Owowagency\LaravelMedia\Tests;
 
-use OwowAgency\Snapshots\MatchesSnapshots;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Owowagency\LaravelMedia\LaravelMediaServiceProvider;
+use OwowAgency\Snapshots\MatchesSnapshots;
+use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 
 class TestCase extends BaseTestCase
 {
