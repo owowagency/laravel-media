@@ -38,7 +38,7 @@ jobs:
         env:
           DB_HOST: mysql
         run: |
-          vendor/bin/phpunit
+          vendor/bin/phpunit tests/Unit
 
       - name: Code sniffer
         run: |
