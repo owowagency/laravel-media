@@ -2,8 +2,8 @@
 
 namespace Owowagency\LaravelMedia\Rules;
 
-use Illuminate\Support\Arr;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Arr;
 use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
 
 class IsBase64 implements Rule
@@ -14,7 +14,6 @@ class IsBase64 implements Rule
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
-     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
@@ -34,9 +33,6 @@ class IsBase64 implements Rule
 
     /**
      * Determine if the given value is base64 encoded.
-     *
-     * @param  mixed  $value
-     * @return bool
      */
     protected function isBase64($value): bool
     {
@@ -59,8 +55,6 @@ class IsBase64 implements Rule
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
     public function message(): string
     {

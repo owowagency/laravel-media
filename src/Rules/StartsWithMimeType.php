@@ -17,8 +17,6 @@ class StartsWithMimeType extends IsBase64
 
     /**
      * StartsWithMimeType constructor.
-     *
-     * @param  string  $mimeType
      */
     public function __construct(string $mimeType)
     {
@@ -29,7 +27,6 @@ class StartsWithMimeType extends IsBase64
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
-     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
@@ -43,9 +40,6 @@ class StartsWithMimeType extends IsBase64
 
     /**
      * Checks if base64 is image.
-     *
-     * @param  string  $value
-     * @return bool
      */
     protected function startsWithMimeType(string $value): bool
     {
@@ -53,13 +47,11 @@ class StartsWithMimeType extends IsBase64
 
         $exploded = explode('/', $mimeType);
 
-        return ($exploded[0] == $this->mimeType);
+        return $exploded[0] == $this->mimeType;
     }
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
     public function message(): string
     {

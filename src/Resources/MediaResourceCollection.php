@@ -16,9 +16,6 @@ class MediaResourceCollection extends ResourceCollection
 
     /**
      * Create a new resource instance.
-     *
-     * @param  mixed  $resource
-     * @param  bool  $forceMediaResource
      */
     public function __construct($resource, bool $forceMediaResource = false)
     {
@@ -31,11 +28,10 @@ class MediaResourceCollection extends ResourceCollection
      * Transform the resource collection into an array.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return array
      */
     public function toArray($request): array
     {
-        return $this->resource->map(function (MediaResource $resource) use ($request) {
+        return $this->resource->map(function (MediaResource $resource) {
             $resource->forceMediaResource = $this->forceMediaResource;
 
             return $resource;

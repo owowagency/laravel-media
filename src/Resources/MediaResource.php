@@ -2,8 +2,8 @@
 
 namespace Owowagency\LaravelMedia\Resources;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaResource extends JsonResource
@@ -18,9 +18,6 @@ class MediaResource extends JsonResource
 
     /**
      * Create a new resource instance.
-     *
-     * @param  \Spatie\MediaLibrary\MediaCollections\Models\Media  $resource
-     * @param  bool  $forceMediaResource
      */
     public function __construct(Media $resource, bool $forceMediaResource = false)
     {
@@ -33,7 +30,6 @@ class MediaResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return array
      */
     public function toArray($request): array
     {
@@ -52,8 +48,6 @@ class MediaResource extends JsonResource
 
     /**
      * Determines if the resource is an image.
-     *
-     * @return bool
      */
     public function isImage(): bool
     {
@@ -63,9 +57,6 @@ class MediaResource extends JsonResource
     /**
      * Returns the url. The method of retrieving it varies on the disk it is
      * stored on.
-     *
-     * @param  string  $conversion
-     * @return string
      */
     public function getUrl(string $conversion = ''): string
     {
@@ -73,7 +64,7 @@ class MediaResource extends JsonResource
 
         if (filter_var($createTempUrl, FILTER_VALIDATE_BOOLEAN)) {
             $expiration = now()->addMinutes(
-                config('laravel-media.sign_expiration', 60)
+                config('laravel-media.sign_expiration', 60),
             );
 
             return $this->resource->getTemporaryUrl($expiration, $conversion);
@@ -85,8 +76,6 @@ class MediaResource extends JsonResource
     /**
      * Create new anonymous resource collection.
      *
-     * @param  mixed  $resource
-     * @param  bool  $forceMediaResource
      * @return \Owowagency\LaravelMedia\Resources\MediaResourceCollection
      */
     public static function collection($resource, bool $forceMediaResource = false): MediaResourceCollection

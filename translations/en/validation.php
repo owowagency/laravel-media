@@ -3,7 +3,7 @@
 return [
 
     'max' => [
-        'file_with_unit' => 'The :attribute must not be greater than :max :unit.'
+        'file_with_unit' => 'The :attribute must not be greater than :max :unit.',
     ],
 
 ];

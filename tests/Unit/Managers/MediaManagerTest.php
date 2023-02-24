@@ -3,11 +3,11 @@
 namespace Owowagency\LaravelMedia\Tests\Unit\Managers;
 
 use Mockery;
-use Owowagency\LaravelMedia\Tests\TestCase;
 use Owowagency\LaravelMedia\Managers\MediaManager;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\MediaLibrary\MediaCollections\FileAdderFactory;
 use Owowagency\LaravelMedia\Tests\Support\Models\TestModel;
+use Owowagency\LaravelMedia\Tests\TestCase;
+use Spatie\MediaLibrary\MediaCollections\FileAdderFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaManagerTest extends TestCase
 {
@@ -103,7 +103,7 @@ class MediaManagerTest extends TestCase
 
         $fileAdder->shouldReceive('usingFileName')
             ->once()
-            ->with($name . '.gif')
+            ->with($name.'.gif')
             ->andReturnSelf();
 
         $fileAdder->shouldReceive('toMediaCollection')
@@ -121,8 +121,6 @@ class MediaManagerTest extends TestCase
 
     /**
      * Prepares for tests.
-     *
-     * @return array
      */
     private function prepare(): array
     {

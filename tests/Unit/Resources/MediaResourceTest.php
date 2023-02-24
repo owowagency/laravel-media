@@ -3,10 +3,10 @@
 namespace Owowagency\LaravelMedia\Tests\Unit\Resources;
 
 use Mockery;
-use Owowagency\LaravelMedia\Tests\TestCase;
 use Owowagency\LaravelMedia\Resources\MediaResource;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Owowagency\LaravelMedia\Tests\Support\Models\TestModel;
+use Owowagency\LaravelMedia\Tests\TestCase;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaResourceTest extends TestCase
 {
@@ -107,9 +107,6 @@ class MediaResourceTest extends TestCase
 
     /**
      * Prepares for tests.
-     *
-     * @param  string  $mime
-     * @return array
      */
     private function prepare(string $mime = 'file'): array
     {
