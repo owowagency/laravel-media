@@ -2,10 +2,10 @@
 
 namespace Owowagency\LaravelMedia\Tests\Unit\Resources;
 
-use Owowagency\LaravelMedia\Tests\TestCase;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Owowagency\LaravelMedia\Resources\MediaImageResource;
 use Owowagency\LaravelMedia\Tests\Support\Models\TestModel;
+use Owowagency\LaravelMedia\Tests\TestCase;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImageResourceTest extends TestCase
 {
@@ -21,8 +21,6 @@ class ImageResourceTest extends TestCase
 
     /**
      * Prepares for tests.
-     *
-     * @return array
      */
     private function prepare(): array
     {

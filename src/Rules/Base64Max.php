@@ -8,15 +8,11 @@ class Base64Max extends IsBase64
 {
     /**
      * The size in kilobytes.
-     *
-     * @var float
      */
     protected float $size;
 
     /**
      * The Base64Max constructor.
-     *
-     * @param  float  $size
      */
     public function __construct(float $size)
     {
@@ -27,7 +23,6 @@ class Base64Max extends IsBase64
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
-     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
@@ -49,8 +44,6 @@ class Base64Max extends IsBase64
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
     public function message(): string
     {

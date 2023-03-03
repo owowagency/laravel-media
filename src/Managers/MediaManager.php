@@ -2,13 +2,13 @@
 
 namespace Owowagency\LaravelMedia\Managers;
 
-use Mimey\MimeTypes;
 use Illuminate\Support\Arr;
-use Spatie\MediaLibrary\HasMedia;
-use Owowagency\LaravelMedia\Rules\IsBase64;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Mimey\MimeTypes;
 use Owowagency\LaravelMedia\Exceptions\UploadException;
 use Owowagency\LaravelMedia\Rules\Concerns\ValidatesBase64;
+use Owowagency\LaravelMedia\Rules\IsBase64;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaManager
 {
@@ -18,19 +18,17 @@ class MediaManager
      * Upload media without specifying the type. Currently this method can
      * upload a string or an array of strings (base64 string).
      *
-     * @param  \Spatie\MediaLibrary\HasMedia  $model
-     * @param  string|array  $media
-     * @param  string|null  $name
-     * @param  string  $collection
-     * @return Media[]
+     * @param  array|string  $media
      *
      * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
+     *
+     * @return Media[]
      */
     public function upload(
         HasMedia $model,
         $media,
         string $name = null,
-        string $collection = 'default'
+        string $collection = 'default',
     ): array {
         if (is_array($media)) {
             $uploads = [];
@@ -60,11 +58,7 @@ class MediaManager
      * Check if the given string is base64. If so, upload
      * the base64 string.
      *
-     * @param  \Spatie\MediaLibrary\HasMedia  $model
-     * @param  string  $string
-     * @param  string|null  $name
-     * @param  string  $collection
-     * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
+     * @param  null|string  $name
      *
      * @throws \Owowagency\LaravelMedia\Exceptions\UploadException
      */
@@ -72,7 +66,7 @@ class MediaManager
         HasMedia $model,
         string $string,
         $name = null,
-        string $collection = 'default'
+        string $collection = 'default',
     ): Media {
         $base64Rule = new IsBase64();
 
@@ -88,17 +82,13 @@ class MediaManager
     /**
      * Saves base64 media to file and adds to collection.
      *
-     * @param  \Spatie\MediaLibrary\HasMedia  $model
-     * @param  string  $string
-     * @param  string|null  $name
-     * @param  string  $collection
-     * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
+     * @param  null|string  $name
      */
     public function uploadFromBase64(
         HasMedia $model,
         string $string,
         $name = null,
-        string $collection = 'default'
+        string $collection = 'default',
     ): Media {
         $fileAdder = $model->addMediaFromBase64($string);
 
@@ -121,7 +111,7 @@ class MediaManager
                         $format,
                         $name,
                         $extension[1],
-                    )
+                    ),
                 );
         }
 
@@ -132,16 +122,11 @@ class MediaManager
 
     /**
      * Saves url media to file and adds to collection.
-     *
-     * @param  \Spatie\MediaLibrary\HasMedia  $model
-     * @param  string  $string
-     * @param  string  $collection
-     * @return \Spatie\MediaLibrary\MediaCollections\Models\Media
      */
     public function uploadFromUrl(
         HasMedia $model,
         string $string,
-        string $collection = 'default'
+        string $collection = 'default',
     ): Media {
         return $model->addMediaFromUrl($string)
             ->toMediaCollection($collection);
@@ -149,9 +134,6 @@ class MediaManager
 
     /**
      * Returns an array that matches the parameters needed to upload.
-     *
-     * @param  array  $data
-     * @return array
      */
     public function getUploadParams(array $data): array
     {

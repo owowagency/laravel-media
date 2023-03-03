@@ -18,8 +18,6 @@ class IsBase64Audio extends StartsWithMimeType
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
     public function message(): string
     {
