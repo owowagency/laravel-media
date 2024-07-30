@@ -26,7 +26,7 @@
         "php": "^7.4|^8.0|^8.1",
         "illuminate/support": "^8.0|^9.0|^10.0",
         "owowagency/laravel-resources": "^3.2",
-        "spatie/laravel-medialibrary": "^8.0|^9.0|^10.0",
+        "spatie/laravel-medialibrary": "^8.0|^9.0|^10.0|^11.0",
         "xantios/mimey": "^2.1"
     },
     "require-dev": {
